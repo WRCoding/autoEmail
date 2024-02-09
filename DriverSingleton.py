@@ -18,13 +18,13 @@ chrome_option.add_experimental_option('prefs', prefs)
 class DriverSingleton:
     _instance = None
     _driver: WebDriver = None
-    _wait = None
+    _wait:WebDriverWait = None
 
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(DriverSingleton, cls).__new__(cls)
             cls._driver = webdriver.Chrome(executable_path='./chromedriver', options=chrome_option)  # 或者你选择的浏览器
-            cls._wait = WebDriverWait(cls._driver, 360)  # 可以调整等待时间
+            cls._wait = WebDriverWait(cls._driver, 30)  # 可以调整等待时间
         return cls._instance
 
     @classmethod
