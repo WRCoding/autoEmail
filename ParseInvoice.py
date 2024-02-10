@@ -1,7 +1,6 @@
 import json
 import os.path
 
-import AI
 import OcrUtil
 import config
 import util

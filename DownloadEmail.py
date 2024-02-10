@@ -5,7 +5,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from watchdog.observers import Observer
 
-import AI
 import Constant
 import ParseInvoice
 import config
