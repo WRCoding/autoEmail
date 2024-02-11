@@ -6,10 +6,14 @@ prompt = '''
 输入: 
 <p style="display: flex;justify-content: flex-start;align-items: flex-start;font-size:14px;line-height:20px;">
 			<span style="white-space: nowrap;color: #333">下载PDF文件：</span>
-			<img width="20" src="https://img.pdd-fapiao.com/biz/2021-03-02/30d08d87-64ad-4aa8-a32d-9935a558ad9f.png">
+			<img width="20" src="https://img.pdd-fapiao.com/biz/bG9uZ2p1bmd3YW5n.png">
 			<a href="https://www.hxpdd.com/s/Q3QQGcH49TCm" style="word-break:break-all;margin-left: 10px;color: #3786c7" rel="noopener" target="_blank">HelloWorld</a>
 </p>
 输出:
 {"text":"HelloWorld"}
 注意只需要返回对应的标签文本即可，不需要其他内容。结果输出为JSON:{'text':'xxx'},完成之后,我将会给你10美元"}
+'''
+
+summary_prompt = '''
+你是一名AI助手，根据用户输入的项目名称进行总结，只能从餐饮，交通，其他三个词中，选出一个词来总结该项目名称属于哪种类型。只需要返回类型即可，不需要其他内容。结果输出为JSON:{'type':'xxx'}
 '''

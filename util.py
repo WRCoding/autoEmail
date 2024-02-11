@@ -1,11 +1,9 @@
-import json
 import os
 import pathlib
 import random
 import time
 from datetime import datetime
 
-import Constant
 import config
 from DriverSingleton import DriverSingleton
 from selenium.webdriver.support import expected_conditions as EC

@@ -31,7 +31,6 @@ def download_email():
     begin()
     start_monitor()
     switch_to_frame()
-    # handle_mail()
     while not end_flag:
         handle_mail()
         next_page()
@@ -77,8 +76,6 @@ def check_file(item):
 
 def handle_mail():
     global end_flag
-    no_attach_invoice_list = []
-    attach_invoice_list = []
     invoice_list = []
     mail_list = get_mail_list()
     mail_num = len(mail_list)
@@ -88,19 +85,15 @@ def handle_mail():
             'mailid')
         title = mail.find_element_by_class_name("tt").text
         if '发票' in title:
-            # print(f'mailid:{mailid}, title:{title}')
             try:
                 mail.find_element(By.CSS_SELECTOR, 'div.cij.Ju')
-                attach_invoice_list.append({'title': title, 'mailId': mailid})
+                invoice_list.append({'title': title, 'mailId': mailid})
             except NoSuchElementException as e:
-                # no_attach_invoice_list.append(mail)
-                attach_invoice_list.append({'title': title, 'mailId': mailid})
-    print(f'-------发票: {len(attach_invoice_list)}-------')
-    for item in attach_invoice_list:
-        # print(f'title:{item["title"]}, mailId: {item["mailId"]}')
+                invoice_list.append({'title': title, 'mailId': mailid})
+    print(f'-------发票: {len(invoice_list)}-------')
+    for item in invoice_list:
         monitor.reset_create()
         mailId = item["mailId"]
-        title = item["title"]
         tag = driver.find_element_by_xpath(f"//nobr[@mailid='{mailId}']")
         tag.click()
         time.sleep(1)
@@ -131,7 +124,6 @@ def exist_element(by, key) -> bool:
 def is_out_date():
     date = util.getDelayElement(By.ID, 'local-time-caption').text.split('（')[0]
     month_date = util.parse_date(date, '%Y年%m月%d日', '%Y%m')
-    # print(f'{date}, month_date: {month_date}')
     return month_date < config.get_out_date()
 
 
@@ -144,8 +136,6 @@ def download_attach():
             attach.find_element_by_partial_link_text('下载').click()
             break
     time.sleep(3)
-    # driver.back()
-    driver.refresh()
     switch_to_frame()
     time.sleep(4)
 
@@ -154,21 +144,17 @@ def handle_no_attach():
     global fail_invoice_list
     container = util.getDelayElement(By.ID, 'mailContentContainer')
     html = container.find_element(By.TAG_NAME, 'div').get_attribute('innerHTML')
-    # print(html)
     text = AI.find_text(html)
     element = util.getDelayElement(By.XPATH, f"//a[contains(text(), '{text}')]")
     element.click()
     wait.until(EC.number_of_windows_to_be(2))
     driver.switch_to.window(driver.window_handles[1])
-    # print(f'origin: {origin_window_handle}, current: {driver.current_window_handle}')
-    # print(driver.window_handles)
     if exist_element(By.TAG_NAME, 'body') and len(
             str(driver.find_element_by_tag_name('body').get_attribute('innerHTML'))) > 0:
         download = util.getDelayElement(By.XPATH, f"//*[contains(text(), '下载')]")
         time.sleep(1)
         download.click()
     time.sleep(2)
-    # print(driver.window_handles)
 
 
 def next_page():

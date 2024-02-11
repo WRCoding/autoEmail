@@ -1,4 +1,4 @@
-from watchdog.events import FileSystemEventHandler, FileSystemEvent, PatternMatchingEventHandler
+from watchdog.events import FileSystemEvent, PatternMatchingEventHandler
 
 
 class MyHandler(PatternMatchingEventHandler):
