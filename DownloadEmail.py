@@ -42,8 +42,6 @@ def begin():
     global origin_window_handle
     driver.get(Constant.BASE_URL)
     origin_window_handle = driver.current_window_handle
-    # driver.get('https://www.hxpdd.com/s/Q3QQGcH49TCm')
-    # print(driver.find_element_by_tag_name('body').get_attribute('innerHTML'))
 
 
 def switch_to_frame():
